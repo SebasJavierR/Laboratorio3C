@@ -1,0 +1,166 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct arbol
+{
+    int dato;
+    struct arbol *izq;
+    struct arbol *der;
+}treenode;
+
+void crear (treenode **hoja, int *raiz);
+void insertar(treenode **hoja, int elem);
+void mostrarOrden (treenode *hoja);
+void mostrarPreOrden (treenode *hoja);
+void mostrarPosOrden (treenode *hoja);
+void mostrarEspecial (treenode *hoja, int *, int, int *, int *);
+
+int main ()
+{
+    int cont=0,raiz,maximo,cont1=0,acum=0;
+    printf ("arboles\n");
+    treenode* arbol=NULL;
+
+    crear (&arbol, &raiz);
+    printf ("**************\n");
+    printf ("mostrar arbol\n");
+    printf ("***************\n");
+
+    printf ("\nMostrar en PreOrden:\n");
+    mostrarPreOrden (arbol);
+    printf ("\nMostrar en Orden:\n");
+    mostrarOrden (arbol);
+    printf ("\nMostrar en PosOrden:\n");
+    mostrarPosOrden (arbol);
+
+    //Segunda Parte
+    printf ("\nMostrar lo pedido en la consigna:\n");
+    maximo=raiz;
+    //printf("Raiz: %d",raiz);//DEBUG
+    mostrarEspecial (arbol,&cont,raiz,&maximo,&acum);
+    printf("\n Valor Maximo y Multiplo de la raiz: %d",maximo);
+    printf("\n Cantidad Nodos hoja divisores de la raiz: %d",cont);
+    printf("\n Sumatoria nodos pares con un hijo: %d", acum);
+
+    return 0;
+}
+void crear (treenode **hoja, int *raiz)
+{
+    int numero;
+
+    printf ("ingrese numero\n");
+    scanf ("%d",&numero);
+    *raiz=numero;
+    while (numero!=-1)
+    {
+
+        insertar(&(*hoja),numero);
+        printf ("ingrese numero\n");
+        scanf ("%d",&numero);
+    }
+}
+
+void insertar (treenode **hoja,int elem)
+{
+    int numero=elem;
+    if (elem==-1)
+        return;
+    if (*hoja==NULL)
+    {
+        //creo la hoja vacia
+        (*hoja)=(treenode*)malloc(sizeof(treenode));
+        (*hoja)->dato=elem;
+        (*hoja)->der=NULL;
+        (*hoja)->izq=NULL;
+    }else{
+
+
+
+
+    if (numero>(*hoja)->dato)
+    {
+
+        insertar (&(*hoja)->der,elem);
+
+    }
+    else
+    {
+
+        insertar (&(*hoja)->izq,elem);
+    }
+    }
+return;
+}
+
+
+
+void mostrarOrden (treenode *hoja)
+{
+    if (hoja!=NULL)
+    {
+
+
+        mostrarOrden(hoja->izq);
+        printf("%d ",hoja->dato);
+        mostrarOrden(hoja->der);
+
+    }
+    return;
+}
+
+void mostrarPreOrden (treenode *hoja)
+{
+    if (hoja!=NULL)
+    {
+
+        printf("%d ",hoja->dato);
+        mostrarPreOrden(hoja->izq);
+        mostrarPreOrden(hoja->der);
+
+    }
+    return;
+}
+
+void mostrarPosOrden (treenode *hoja)
+{
+    if (hoja!=NULL)
+    {
+
+        mostrarPosOrden(hoja->izq);
+        mostrarPosOrden(hoja->der);
+        printf("%d ",hoja->dato);
+
+    }
+    return;
+}
+
+void mostrarEspecial (treenode *hoja, int *cont, int raiz, int *maximo, int *acum)
+{
+    if (hoja!=NULL)
+    {
+
+        mostrarEspecial(hoja->izq,cont,raiz, maximo,acum);
+        mostrarEspecial(hoja->der,cont, raiz,maximo,acum);
+        //El valor máximo múltiplo de la raíz.
+        if (hoja->dato > *maximo || hoja->dato % raiz == 0)
+            *maximo=hoja->dato;
+        
+        //La cantidad de nodos hojas divisores de la raíz.
+        if(raiz % hoja->dato ==0 || hoja->der!=NULL || hoja->izq!=NULL )
+                *cont=*cont+1;
+
+        //Nodos pares
+        if (hoja->dato%2==0)
+        {
+            //Con un Hijo (sumatoria)
+            if ((hoja->der!=NULL && hoja->izq==NULL) || (hoja->der==NULL && hoja->izq!=NULL))
+            {
+                *acum=*acum+hoja->dato;
+            }
+
+
+
+        }
+    }
+    return;
+}

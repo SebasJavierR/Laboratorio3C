@@ -1,0 +1,50 @@
+Cola de mensajes, hay que limpiar/liberar la cola de mensajes antes para evitar informacion vieja/abandonada
+
+treat (tema futuro), cola de mensaje bloquea tambien.
+Usar semaforos y no basarnos unicamente en el bloqueo de cola de mensajes.
+Semaforo para la seccion critica.
+
+tipos de mensaje = eventos
+typedef enum
+{
+	EVT_NINGUNO, //valor 0
+	EVT_A, 
+	EVT_B,
+	EVT_n
+} Eventos;
+
+Para obtener una cola contodos los permisos para todo el mundo, es necesario poner como parte de losflags el número 0777.
+Los flags deberían seralgo así como 0777 | IPC_CREAT
+
+int creo_id_cola_mensajes(int clave)
+{
+	int id_cola_mensajes = msgget (creo_clave(clave), 0600 | IPC_CREAT);
+	if (id_cola_mensajes == -1)
+		{
+			printf("Error al obtener identificador para cola mensajes\n");
+			exit (-1);
+		}
+	return id_cola_mensajes;
+}
+
+El primer parámetro entero es elidentificador de la cola obtenido con msgget()
+El segundo parámetro es el mensajeen sí. El mensaje debe ser una estructura cuyo primer campo sea un long
+El tercer parámetro es el tamaño en bytes delmensaje exceptuando el long, es decir, el tamaño en bytes de los campos con lainformación.
+El cuarto parámetro son flags
+
+int enviar_mensaje(int id_cola_mensajes,long rLongDest,int rIntRte,int rIntEvento,char* rpCharMsg){mensaje msg;msg.long_dest = rLongDest;msg.int_rte = rIntRte;msg.int_evento = rIntEvento;strcpy(msg.char_mensaje, rpCharMsg);return msgsnd (id_cola_mensajes,(struct msgbuf *)&msg,sizeof(msg.int_rte)+sizeof(msg.int_evento)+sizeof(msg.char_mensaje),IPC_NOWAIT);}
+
+enviar_mensaje(id_cola_mensaje, MSG_SUPERMERCADO, MSG_REPOSITOR, EVT_SUMA_STOCK, "Suma uno");
+identificador cola, identificador destinario, identificador remitente, identificador evento, cadena de texto
+
+int recibir_mensaje(int id_cola_mensajes,long rLongDest,mensaje* rMsg){mensaje msg;int res;res = msgrcv (id_cola_mensajes,(struct msgbuf *)&msg,sizeof(msg.int_rte)+sizeof(msg.int_evento)+sizeof(msg.char_mensaje),rLongDest, 0);rMsg->long_dest = msg.long_dest;rMsg->int_rte = msg.int_rte;rMsg->int_evento = msg.int_evento;strcpy(rMsg->char_mensaje, msg.char_mensaje);return res;}
+
+recibir_mensaje(id_cola_mensaje, MSG_SUPERMERCADO, &msg);
+Identificador de la cola, Identificador del reseptor, todos los datos del mensaje
+"Recivir_mensaje" es bloqueante
+
+
+En global.c y .h van las estructuras
+en cola de mensajes van 4 funciones, enviar,recivir, borrar,
+
+cocalc.com

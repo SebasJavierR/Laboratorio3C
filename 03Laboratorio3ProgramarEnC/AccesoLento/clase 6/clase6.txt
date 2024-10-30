@@ -1,0 +1,1 @@
+ipcs -m //matar el programa y muestra.

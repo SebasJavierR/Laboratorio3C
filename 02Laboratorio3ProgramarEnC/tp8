@@ -1,0 +1,127 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct lista{
+	int num;
+	int num1;
+	int num3;
+	struct lista *sig;
+ }nodo;
+
+void crear (nodo *registro)
+{
+    printf("Ingrese el primer numero: ");
+    scanf("%d",&registro->num);
+
+    if (registro->num==0)
+        registro->sig=NULL;
+    else
+	{
+        printf("Ingrese el segundo numero: ");
+        scanf("%d",&registro->num1);
+        printf("Ingrese el tercer numero: ");
+        scanf("%d",&registro->num3);
+        printf("Siguiente nodo\n");
+        
+        registro->sig=(nodo*)malloc(sizeof(nodo));
+        crear (registro->sig);
+
+	}
+	return;
+}
+
+void mostrar (nodo *registro)
+{
+    if (registro->sig !=NULL)
+	{
+        printf ("%d\n",registro->num);
+        printf ("%d\n",registro->num1);
+        printf ("%d\n",registro->num3);
+        printf("Siguiente nodo\n");
+        mostrar (registro->sig);
+	}
+	return;
+}
+
+void insertar (nodo *registro)
+{
+    nodo *aux = NULL;
+    while (registro -> sig != NULL)
+    {
+        if (registro -> num + registro -> num1 + registro -> num3 > 20)
+        {
+           aux = (nodo*)malloc(sizeof(nodo));
+           aux -> num = registro -> num * 2;
+           aux -> num1 = registro -> num1 * 2;
+           aux -> num3 = registro -> num3 * 2;
+           aux -> sig = registro -> sig;
+           registro -> sig = aux;
+           registro=registro->sig->sig;
+        }
+        else
+    registro = registro -> sig;
+    }
+}
+
+nodo* eliminarporcabeza (nodo*h, nodo*n2)
+{
+    nodo *aux = NULL;
+    nodo *a=NULL;
+    nodo *aux1=NULL;
+    while (h -> num + h -> num1 + h -> num3 == 20)
+    {
+        n2->num=h->num;
+        n2->num1=h->num1;
+        n2->num3=h->num3;
+        n2->sig= (nodo*)malloc(sizeof(nodo));
+        n2=n2->sig;
+        aux = h->sig;
+        free (h);
+        h = aux;
+
+    }
+    a=h;
+
+    while (a -> sig != NULL && a->sig->sig !=NULL)
+    {
+        if (a ->sig->num + a ->sig->num1 + a ->sig->num3 == 0)
+        {
+
+            n2->num=a->sig->num;
+            n2->num1=a->sig->num1;
+            n2->num3=a->sig->num3;
+            n2->sig= (nodo*)malloc(sizeof(nodo));
+            n2=n2->sig;
+
+            aux1 = a-> sig -> sig;
+            free (a -> sig);
+            a -> sig = aux1;
+        }
+        else
+            a = a-> sig;
+    }
+    n2->sig=NULL;
+    return h;
+}
+
+int main()
+{
+    nodo *prin;
+    nodo *seg;
+    prin=(nodo*)malloc(sizeof(nodo));
+    seg=(nodo*)malloc(sizeof(nodo));
+    crear(prin);
+    printf("Listo ingresada: \n");
+    mostrar (prin);
+    insertar(prin);
+    printf("lista modificada: \n");
+    mostrar (prin);
+    
+    prin = eliminarporcabeza (prin,seg);
+    printf("lista luego de borrar: \n");
+    mostrar (prin);
+    printf("lista de nodos borrados: \n");
+    mostrar (seg);
+    return 0;
+}

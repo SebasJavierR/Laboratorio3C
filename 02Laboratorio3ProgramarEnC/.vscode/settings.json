@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "tp4": "c",
+        "tp9": "c",
+        "tp10": "c",
+        "*.1": "c",
+        "arbol": "c",
+        "arboltodos": "c",
+        "matriz": "c"
+    }
+}

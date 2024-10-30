@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+//Nota, intente hacer funciones aparte para cargar/mostrar la matriz pero no logre que funcionaran
+//Por ejemplo
+//void cargar(int matriz[][], int dimensiones){}
+// o
+//void cargar(int matriz[dimesiones][dimensiones], int dimensiones){}
+//como podria hacer se hace para meter una matriz de tamaño desconosido desde el main a un void?
+//el ejemplo que vi usaba un tamaño de matriz prefijado matriz[10][10],
+//esto no se romperia si el usuario ingresa una matriz mas grande?
+
+//Deje int variable_creada, dispersos por el codigo para cuando averigue como crear la funcion con la matriz poder acomodar todo rapidamente,
+//tambien deje marcado con por ejemplo //cargar que parte corresponderia a cada funcion.
+
+int main() {
+    int dimensiones=0,posicion,antisimetria=0,total=0;;
+    while(dimensiones <= 1 ){
+        printf("\nIngrese las dimensiones de la matriz (mayor que 1): ");
+        scanf("%d",&dimensiones);
+    }
+    printf("\nLas dimensiones seran de %d x %d”,dimensiones,dimensiones);
+    int matriz[dimensiones][dimensiones];
+    
+    //Cargar
+    int columna,fila;
+    for(fila = 0;fila < dimensiones; fila++)
+        for(columna = 0;columna < dimensiones; columna++){
+            printf("\nIngrese el elemento %d x %d: ",fila+1,columna+1);
+            scanf("%d",&matriz[fila][columna]);
+        }
+        
+    //Mostrar
+    printf("\n ");
+    for(fila = 0;fila < dimensiones; fila++){
+        for(columna = 0;columna < dimensiones; columna++)
+            printf("%d ",matriz[fila][columna]);
+        printf("\n");
+    }
+    
+    //antisimetria
+    columna=0;
+    fila=0;
+
+    for(fila = 0;fila < dimensiones; fila++){
+        for(columna = 0;columna < dimensiones; columna++){
+            if(matriz[fila][columna]==-matriz[columna][fila]||columna==fila){
+                antisimetria++;
+            }    
+        }
+    }
+    printf ("\nAntisimetria: %d ",antisimetria); //debug
+    printf ("\ndimensiones*2: %d ",dimensiones*dimensiones); //debug
+    if(dimensiones*dimensiones == antisimetria){
+        //promedio diagonal secundaria siempre sera 0 si es antisimetrica y de dimenciones pares
+        if(dimensiones%2==0){
+            printf ("\nPromedio diagonal secundaria: 0 ");
+        }
+        //Como todos los numeros se anulan mutuamente solo importa la casilla central
+        if(dimensiones%2!=0){
+            printf ("\nPromedio diagonal secundaria: %d ",matriz[(dimensiones-1)/2][(dimensiones-1)/2]/dimensiones);
+        }
+    }
+    
+    if(dimensiones*dimensiones != antisimetria){
+    //promedio diagonal principal
+        for(posicion = 0;posicion < dimensiones; posicion++)
+            total = matriz[posicion][posicion] + total;
+        printf ("\nPromedio diagonal principal: %d ",total/posicion);
+    }
+    return 0;
+}

@@ -1,0 +1,18 @@
+Nota: es importante limpiar variables	
+int main(int incant, char *szarg[])
+{
+	/*Cuerpo programa, daclaro variables*/
+	int x=0;
+	int *y;
+	char *var
+	char datosdeentrada[SO+1];
+	/*Cuerpo*/
+	memset(datosentrada,'0x00',sizeof(datosentrada)); /*Limbiar string*/
+	/*strlen(datosentrada) -- devuelve longitud de entrada*/
+	
+	printf("arametros %d - primer: % % %\n", incant, szarg[0],szarg[i],szarg[i][i])
+
+	
+	
+	
+}

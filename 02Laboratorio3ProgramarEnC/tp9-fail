@@ -1,0 +1,93 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct listas{
+        int legajo;
+        struct informacion *c; 
+        struct listas *sig;
+}nodol;
+typedef struct informacion{
+        int edad;
+        int cant_mat_cursadas;
+        int cant_mat_aprobadas;
+        struct informacion * sigc;
+}nodoc;
+
+------------
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct lista{
+        int legajo;
+        int edad;
+        int cant_mat_cursadas;
+        int cant_mat_aprobadas;
+        struct lista *sig;
+}nodo;
+
+void crear(nodoc *t){
+	printf("ingrese nombre de la cancion");
+	scanf("%s",t->edad);
+	if(strcmp(t->nombre,"x")==0)
+		t->sigc=NULL;
+	else{
+		printf("ingrese interprete");
+		scanf("%s",t->inter);
+		printf("ingrese duracion");
+		scanf("%d",&t->duracion);
+		t->sigc=(nodoc *)malloc(sizeof(nodoc));
+		crear_informacion(t->sigc);
+		
+	}
+   	
+} 
+
+
+void crear(nodol *h){
+	printf("Ingrese el legajo");
+	scanf("%s",h->legajo);
+	if(strcmp(h->legajo,"x")==0)
+		h->sig=NULL;
+	else{
+	    h->c=(nodoc *)malloc(sizeof(nodoc));
+		crear_informacion(h->c);
+		h->sig=(nodol *)malloc(sizeof(nodol));
+		crear_lista(h->sig);
+		
+	}
+	
+}
+
+void mostrar_informacion(nodoc *t){
+	if(t->sigc !=NULL){
+		printf("%s ",t->nombre);
+		printf("%s ",t->inter);
+		printf("%d ",t->duracion);
+		printf("\n");
+		mostrar_informacion(t->sigc);
+		
+		
+	}
+	
+}
+
+void mostrar_lista(nodol *h){
+	if(h->sig!=NULL){
+		printf("%s \n",h->nombre);
+		printf("las canciones son\n");
+		mostrar_informacion(h->c);
+		mostrar_lista(h->sig);
+	}
+}
+
+
+int main(){
+	nodol *p=NULL;
+	p=(nodol *)malloc(sizeof(nodol));
+	crear(p);
+	mostrar(p);
+	
+}

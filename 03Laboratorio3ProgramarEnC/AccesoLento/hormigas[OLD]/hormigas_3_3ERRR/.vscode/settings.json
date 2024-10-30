@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "memoria.h": "c",
+        "productor.h": "c",
+        "thread_reina.h": "c",
+        "menu_base.h": "c"
+    }
+}

@@ -1,0 +1,14 @@
+mostrar archivos en el lugar al que apuntas
+ls 
+
+Volver a apuntar al inicio
+cd
+
+apuntar a una carpeta
+cd [nombreCarpeta]
+
+Compilar
+make
+
+ejecutar
+./[nombre] [dato]

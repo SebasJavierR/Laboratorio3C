@@ -1,0 +1,17 @@
+ls
+sudo su
+nano main.c
+gcc main.c
+
+gcc-4.1 -o nombrePrograma main.c -pedantic-errors -wall -std
+./nombrePrograma
+ps -s 					ver el programa
+kill -9 NumeroDelProceso		el 9 es una accion no el numero del proceso
+
+
+
+
+.h = hider
+
+
+CC = g++ gcc

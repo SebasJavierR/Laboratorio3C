@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+
+int dimensiones=0;
+int producto_diagonal_matriz(int matriz[dimensiones][dimensiones],int dimensiones) {
+    if(dimensiones == 0){
+        return 1;
+    }
+    //printf("%d * ", matriz[dimensiones-1][dimensiones-1]);//DEBUG
+    return matriz[dimensiones-1][dimensiones-1] * producto_diagonal_matriz(matriz,dimensiones-1);
+}
+
+
+
+int main() {
+    int producto_diagonal;
+    while(dimensiones <= 1 ){
+        printf("\nIngrese las dimensiones de la matriz (mayor que 1): ");
+        scanf("%d",&dimensiones);
+    }
+    printf("\nLas dimensiones seran de %d x %d”,dimensiones,dimensiones);
+    int matriz[dimensiones][dimensiones];
+    
+    //Cargar la matriz
+    int columna,fila;
+    for(fila = 0;fila < dimensiones; fila++)
+        for(columna = 0;columna < dimensiones; columna++){
+            printf("\nIngrese el numero de la posicion %d x %d: ",fila+1,columna+1);
+            scanf("%d",&matriz[fila][columna]);
+        }
+        
+    //Mostrar la matriz
+    printf("\n La matriz ingresada fue: \n");
+    for(fila = 0;fila < dimensiones; fila++){
+        for(columna = 0;columna < dimensiones; columna++)
+            printf("%d ",matriz[fila][columna]);
+        printf(" \n");
+    }
+    //Calcular el producto de los elementos de la diagonal principal en forma recursiva
+    printf("\nEl producto de la diagonal de la matriz es: %d ",producto_diagonal_matriz(matriz,dimensiones));
+    
+    
+    
+    return 0;
+}

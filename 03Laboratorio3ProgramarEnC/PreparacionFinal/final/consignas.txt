@@ -1,0 +1,22 @@
+2 procesos
+
+jugadors 5 x 2 = 10 hilos
+
+goles de arquero valen 2
+
+5 goles gana
+
+output : soy el jugador N y voy a disparar
+Output: Atajo erro
+
+Espera = 200ms
+
+evt_patear evt_atajar evt_fin evt_esperar?
+
+turno = 0,1,2,3,4, si 0 patea
+cargo 0,1,2 ataque 2,defensa 2,arquero
+goles = 0
+
+
+REINA TEAM A PRIMERO
+HORMIGAS = TEAM B SEGUNDO

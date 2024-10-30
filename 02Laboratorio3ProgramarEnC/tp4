@@ -1,0 +1,41 @@
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <string.h>
+
+int main() {
+    int letra_actual,contador_letras=0,ultima_letra,primera_letra,letra_anterior,contador_palabras=0, contador_vocales=0;
+    printf("Escriba una frase terminada en punto: ");
+    letra_actual=getchar();
+    primera_letra = letra_actual;
+    ultima_letra = letra_actual;
+    letra_anterior = letra_actual;
+    printf("\nTras agregar 3 espacios despues de cada palabra que finaliza en S y con almenos 2 vocales quedaria: ");
+    while(letra_anterior!='.') {
+        
+        //Consigna b
+        if(letra_anterior != ' ')
+            contador_letras++;
+        if(letra_anterior == ' ')
+            primera_letra = letra_actual;
+        if(letra_actual == ' ' || letra_actual =='.') {
+            ultima_letra = letra_anterior;
+            if(ultima_letra==primera_letra && contador_letras > 4)
+                contador_palabras++;
+            contador_letras = 0;
+        }
+        
+        //Consigna a
+        if(letra_actual == 'a' || letra_actual == 'e' || letra_actual== 'i' || letra_actual == 'o' || letra_actual == 'u')
+            contador_vocales++;
+        if(letra_actual==' ' && contador_vocales >= 2 && letra_anterior == 's')
+             printf("  ");
+        if(letra_actual==' ')
+            contador_vocales = 0;
+    
+        letra_anterior=letra_actual;
+        printf("%c",letra_actual);
+        letra_actual=getchar();
+    }
+    printf("\nHay %d palabras con MAS de 4 letras que empiezan y terminan con la misma letra",contador_palabras);
+    return 0;
+}

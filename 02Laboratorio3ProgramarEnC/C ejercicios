@@ -1,0 +1,228 @@
+EJERCICIO 1
+
+#include <stdio.h>
+
+int main()
+
+{   
+    int numeros_buscados=4;
+    int numero_actual=1;
+    int numeros_obtenidos=0;
+    
+    while(numeros_obtenidos <= numeros_buscados)
+    {
+        int suma = 0;
+        int divisor = 1;
+        
+        while(divisor <= numero_actual / 2,divisor += 1)
+        {
+            if(numero_actual % divisor == 0);
+            {
+                suma += divisor;
+        
+            }
+        }    
+        if(suma > numero_actual)
+        {
+            printf("\n%d",numero_actual);
+            numeros_obtenidos += 1;
+        }
+        numero_actual += 1; 
+    
+    
+    return 0; 
+    }
+}
+main();
+
+---------------------
+RESOLUCION 1
+
+#include <stdio.h>
+
+int main() {
+   int num=1,cont=0,acum=0,i;
+	while(cont < 4){
+        for (i=1;i<num;i++){
+			if (num%i==0){
+				acum=acum+i;
+			}
+		} 
+        if (acum > num){
+			cont++;
+			printf("\neste numero es abundante %d",num);
+		}
+        acum=0;
+		num++;
+		
+	}
+    return 0;
+}
+
+
+--------------------
+
+EJERCICIO 2
+
+
+#include <stdio.h>
+
+int main() 
+{
+    int bucle_infinito = 0;
+    while(bucle_infinito != 0)
+    {
+        int numero = 0;
+        int cont_ceros = 0;
+        int cont_unos = 0;
+        printf("\nIngrese un Numero: ");
+        scanf("%d",&numero);
+        
+        while(numero != 1)
+        {
+            if(numero % 2 == 0)
+            {
+                cont_ceros += 1;
+            }
+            if(numero % 2 != 0)
+            {
+                cont_unos += 1;
+            }
+            numero = numero / 2;
+        }
+        if(cont_unos % 2 == 0 || cont_ceros % 2 == 0)
+        {
+            printf("Es Número malvado");    
+            return 0;
+        }  
+        printf("No es Número malvado"); 
+    }
+    return 0;
+}
+
+--------------
+
+RESUELTO 2
+
+#include <stdio.h>
+
+int main() {
+   int num,cont=0,acum=0,i,cont1=0,num1;
+	printf("\ningrese un numero");
+	scanf("%d",&num);
+	while(num >0){
+        num1=num;
+		while (num>0   ){
+			if (num%2==1){
+				cont++;
+				}
+			num=num/2;	
+		}
+		//printf("\n cantidad de unos %d",cont);
+		if (cont%2==0){
+			printf("\n este numero es malvado %d",num1);
+			cont1++;
+		}
+        printf("\ningrese un numero");
+	    scanf("%d",&num);
+		cont=0;
+	}
+	printf("\n la cantidad de numeros malvados es %d",cont1);
+    return 0;
+}
+
+---------------
+
+AREGLOS / VECTORES Ejemplo 1
+
+#include <stdio.h>
+
+int cargar (int a[]){
+
+    int i=0,num;
+	printf("\n ingrese valor");
+	scanf("%d",&num);
+    while (num > 0){
+		if (num%2==0){
+             a[i]=num;
+			 i++; 
+		}
+        printf("\n ingrese valor");
+	    scanf("%d",&num); 
+
+	}
+	return i;
+	}
+	
+
+
+
+void mostrar (int a[],int dim){
+
+    int i;
+	for (i=0;i<dim;i++){
+		printf("\n %d  %d",i, a[i]);
+		
+	}
+	return;
+}
+
+int main(){
+   int vec[100],dim;
+	dim=cargar(vec);
+	
+	mostrar(vec,dim);
+
+}
+
+
+---------------
+
+AREGLOS / VECTORES Ejemplo 2
+
+#include <stdio.h>
+
+int cargar (int a[]){
+
+    int i=0,num;
+	printf("\n ingrese valor");
+	scanf("%d",&num);
+    while (num > 0){
+		if (num%2==0){
+             a[i]=num;
+			 i++; 
+		}
+        printf("\n ingrese valor");
+	    scanf("%d",&num); 
+
+	}
+	return i;
+	}
+	
+void mostrar (int a[],int dim){
+
+    int i;
+	for (i=0;i<dim;i++){
+		printf("\n %d  %d",i, a[i]);
+		
+	}
+	return;
+}
+void insertar(int a[],int dim){
+	int i;
+	for (i=dim; i>0;i--){
+		a[i]=a[i-1];
+	}
+	a[0]=1000;
+    return;
+	}
+
+int main(){
+   int vec[100],dim;
+	dim=cargar(vec);
+	mostrar(vec,dim);
+	insertar(vec,dim);
+	printf("\n el arreglo con insercion es");
+	mostrar(vec,dim+1);
+
+}

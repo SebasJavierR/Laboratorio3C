@@ -1,0 +1,130 @@
+select *--first_name, last_name
+from employee
+where department_id = 30
+and salary > 1500
+order by first_name
+
+
+-- comenta linea
+/*
+Comenta todo entre
+*/
+select distinct name
+from DEPARTMENT
+
+
+
+select first_name, last_name, d.department_id, name
+from employee e,
+    department d
+where e.department_id = d.department_id
+--and salary > 1500
+order by first_name
+
+
+select *
+from product
+where description like'ACE%' --USA COMILLAS SIMPLES // "_" es el comodin de un caracter // '%TENNIS%'
+
+
+select * 
+from product
+where product_id < 100900
+
+
+select *
+from employee
+where department_id in (10,20)
+
+
+select * 
+from salary_grade
+
+
+select first_name, last_name, salary, sg.grade_id
+from employee e,
+    salary_grade sg
+where e.salary between  sg.lower_bound
+                    and sg.upper_bound
+
+
+select first_name || last_name -- envez de || purdo usar "||' '|| nombre_completo" esto los combiona en un solo nombre
+from employee
+
+
+-- NULL + CUALQUIER COSA = NULL, para evitarlo:
+select *
+from employee
+where commission is null -- "= null" NO FUNCIONA
+
+
+select j.employee_id, j.first_name, j.last_name, e.employee_id, e.first_name, e.last_name
+from employee e,
+    employee j
+where e.manager_id = j.employee_id
+order by j.last_name, e.last_name
+--Esto no trae al que no tiene jefe
+
+
+select j.employee_id, j.first_name, j.last_name, e.employee_id, e.first_name, e.last_name
+from employee e,
+    employee j
+where e.manager_id = j.employee_id (+) -- "(+)" agrega un jefe null // agrega una opcion null que coincide con todo lo que no tengan nada
+order by j.last_name, e.last_name
+
+
+select d.department_id, name, count(e.employee_id)
+from employee e,
+     department d
+where e.department_id (+) = d.department_id
+group by d.department_id, name
+having count(e.employee_id) < 3 --solo trae con menos de 3, no es obligatorio aclarar
+
+--FUNCIONES
+    --TRAE una tabla con la fecha del motor
+select sysdate  
+  from dual
+    --TRAE EL USUARIO DEL SERVER
+select user  
+  from dual
+    --lleva todo a mayusculas // lleva todo a minuscula // lleva la primera letra de cada palabra a mayuscula 
+    -- // del 3 caracter toma 4 caracteres //quita espacios de mas // r = derecha podria ser lpad agrega hasta el caracter 20 con '-'
+select upper('hola mundo'), lower('Hola mundo'), initcap('hola mundo'), 
+       substr('hola mundo',3,4), trim('       Hola mundo      '), rpad('hola mundo',20,'-'),
+       round(123.888,2), -- USAR PUNTO
+  from dual    
+ 
+     -- Para redondear ,2 indica redondear en el segundo desimal, puedo usar numeros negaticos para numeros grandes
+     -- se usa para truncar, CORTA sin redondear
+ select round(123.888,2), -- USAR PUNTO
+        trunc(125.8888,2) --Es util para FECHAS, en especial para comprarlas porque aveces tienen oculto hora, minuto, ect
+  from dual
+
+select to_char(sysdate,'dd-mm-yyyy hh24:mi'), to_char(124.34) --Esto seria una cadena de caracteres
+from dual
+
+select to_number('326,18') --Se puede usar para validar un dato de entrada
+from dual
+
+select to_char( 
+                to_date('01/02/2003','dd/mm/yyyy')
+                        , 'dd-mm-yyyy hh24:mi')
+from dual
+
+
+-- el nvl se usa para remplazar los null por un numero,
+select first_name,last_name,salary,commission, nvl(salary,0) + nvl(commission,0) total
+from employee
+
+select department_id, name, decode(location_id, 122,'Mar del plata',
+                                                124,'Cordoba', 
+                                                location_id) -- el ultimo location_id es para que muestre el numero y no null tambien podria hacer 'otro' y mostraria otro en todos los numeros no mensionados
+from department
+
+
+select first_name, last_name, salary
+from employee e
+where salary > (select avg(salary)
+                from employee s
+                where e.department_id = s.department_id)
+

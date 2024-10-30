@@ -1,0 +1,23 @@
+#include <stdio.h>
+void cargar(int mat[][10],int d){
+	int i,j;
+	for(i=0;i<d;i++){
+		for(j=0;j<d;j++){
+			printf("\n ingrese valor %d %d  ",i,j);
+			scanf("%d",&mat[i][j]);
+		}
+	}
+
+}
+void mostrar(int mat[][10],int d){
+	int i,j;
+	for(i=0;i<d;i++){
+		
+		for(j=0;j<d;j++){
+			printf("\t %d  ",mat[i][j]);
+			
+		}
+		printf("\n");
+	}
+
+}

@@ -1,0 +1,8 @@
+# Valgrind
+- Esta herramienta solo podemos utilizarla fuera de la VM.
+- La idea es poder hacer uso de la misma en instancias de práctica. No durante exámenes.
+- No es una herramienta oficial de la cátedra y no fue indicada por el profesor.
+- https://valgrind.org/docs/manual/quick-start.html#quick-start.prepare
+´´´
+valgrind -s --track-origins=yes --leak-check=yes ./[program]
+´´´

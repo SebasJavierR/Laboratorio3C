@@ -1,0 +1,118 @@
+
+Presentación trabajo práctico
+
+
+La presentación consta del armado de un documento que debe ser entregado una semana antes de la instancia oral, en la que se realizará la exposición del TP (la fecha será estipulada al momento de la asignación del TP).
+
+El trabajo práctico puede realizarse de forma grupal, pero se evaluará a cada participante de forma individual.
+
+ 
+
+Contenido básico de la presentación sobre el tipo de base de datos asignada o tema asignado:
+
+ 
+
+1.Descripción de la arquitectura, las características y sus funcionalidades.
+2.Ventajas y desventajas.
+3.Comparación contra los otros tipos de datos, cuándo conviene usarla y cuándo no.
+4.Modo de licenciamiento, de ser posible comentar acerca de los precios.
+5.Mostrar la instalación del motor de la BD siempre que sea posible.
+6.Años de antigüedad de su creación, principales empresas en donde funciona, proveedor que facilita el producto.
+
+BD RELACIONAL
+BD OPEN SOURCE
+BD ORIENTADA A OBJETOS
+BD EMBEBIDAS
+-
+BD NO SQL
+-
+BD DISTRIBUIDAS
+CAPAS DE PERSISTENCIA
+SERVICIOS EN LA NUBE
+OPTIMIZACIÓN (SO Y BD/APLICACIONES)
+MINERÍA DE DATOS
+
+
+Point
+
+Que son las BD NoSQL - Yo
+Big Data - Yo
+Arquitecuras - Lucas
+Funcionalidad - Lucas
+Comparacion - Lucas
+Ventajas/desventajas - Yo
+Productos - Lucas
+Como Se usa una base datos - yo
+
+Orden
+Que son las BD NoSQL - Yo
+Arquitecuras - Lucas
+Big Data - Yo
+Funcionalidad - Lucas
+Ventajas/desventajas - Yo
+Comparacion - Lucas
+Productos - Lucas
+Como Se usa una base datos - yo
+
+
+Preguntas:
+
+LUCAS:
+¿A qué se refiere NoSQL?
+
+- Que no se utiliza el lenguaje SQL
+- No usa SQL como principal lenguaje
+- Ninguna de las anteriores
+
+Cuáles son las 3V's?
+- Volumen - Velocidad - Variedad
+- Variedad - Versatilidad - Volatilidad
+- Volumen - Velocidad - Visibilidad
+
+Una base de datos de documentos puede contener documentos dentro de otros:
+- Verdadero
+- Falso
+
+En que caso se utiliza una base de datos NoSQL?
+- Uso empresarial
+- Big Data
+- Casos de donde los datos deben ser consistentes y la posibilidad de error debe ser baja
+
+Cuál de estos productos de bases de datos NoSQL pertenece a una base de datos de Documentos:
+- Neo4j
+- Hypertable
+- MongoDB
+
+---
+SEBAS:
+¿Cuales de las siguientes son ventajas Clave-Valor?
+-Modelo dinámico
+-Estructuras genérica
+-Altamente flexible
+-permite agregar atributos en una etapa posterior al diseño
+Respuesta: -Todas
+
+¿Cual es la desventaja comun entre BD Clave-valor, Documentales y Columnas Extendidas?
+-No asegura la integridad del tipo de dato.
+-Flexibilidad
+-Falta de dinamismo
+Respuesta: -No asegura la integridad del tipo de dato.
+
+A quien corresponde la siguiente definicion de NoSQL?
+"NoSQL abarca una amplia variedad de diferentes tecnologías de bases de datos que se desarrollaron en respuesta a las demandas presentadas en la construcción de aplicaciones modernas" 
+-MongoDB
+-Datastax
+-NoSql-detabase.org
+Respuesta: -MongoDB
+
+Cuales de las siguientes companias utilizan Bases de datos columnas extendidas
+- Amazon
+- Cisco
+- Ebay
+Repuesta: Amazon
+
+ACID se refiere a :
+-ATOMICIDAD, COHERENCIA, AISLAMIENTO, DURABILIDAD
+-ATOMICIDAD, COHERENCIA, ISLACIONISMO, RESISTENCIA
+-ATOMICIDAD, CONSISTE, ISLACIONISMO, DURABILIDAD
+Respuesta: ATOMICIDAD, COHERENCIA, AISLAMIENTO, DURABILIDAD

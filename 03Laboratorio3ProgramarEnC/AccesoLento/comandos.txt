@@ -1,0 +1,18 @@
+Directorio actual: pwd
+Lista Archivos directorio actual: ls
+	-a elementos ocultos
+Moverse directorio: cd {ruta\_absoluta\_o\_relativa}
+Mover directorio: mv mi_archivo.txt ./mi_carpeta/mi_archivo.txt
+Remover archivos: rm
+Chequeo procesos: ps aux
+Cerrar proceso - control c - Acceso directo
+	*reinicia la consola
+
+
+Moverse con ls y cd a la carpeta
+tiro "make" para compilar
+uso "make clean" si ya habia echo un "make" antes, para limpiar archivos
+
+Uso: "./programa" para iniciar.
+
+https://www.sanfoundry.com/c-program-replace-line-text-file/

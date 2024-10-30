@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "semaforos.h": "c",
+        "archivos.h": "c"
+    }
+}

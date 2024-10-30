@@ -1,0 +1,6 @@
+Interprete que la cantidad de hormigas pedidas es el maximo de tareas que puede hacer la reina
+
+
+
+*Use de base condigo de tps anteriores no tube tiempo de corregir todos los nombres.
+tambien hay variables no usadas de tps previos

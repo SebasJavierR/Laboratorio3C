@@ -1,0 +1,92 @@
+#include <stdio.h>
+
+void cargar(int vector[]) {
+    int contador=0,numero;
+    while(contador <= 10 && numero != 0) {
+        printf("\nIngrese un numero entero positivo o cero para terminar: ");
+        scanf("%d",&numero);
+        
+        if(numero == 0) {
+            printf("\nUsted termino de ingresar el vector");
+        }
+        if(numero > 0) {
+            vector[contador] = numero;
+            printf("\nUsted agrego %d al vector exitosamente", numero);
+            contador++;
+        }
+        if(numero < 0) {
+            printf("\nEl numero %d es negativo, no pudo ser agregado", numero);
+        }
+    vector[19] = contador; //Guardo el Largo del vector
+    }
+}
+int promedio(int vec[]){ // calcula el promedio
+    int contador = 0, suma = 0,resultado = 0;
+    for(vector[19] <= contador){
+        suma = suma + vector[contador];
+    }
+    resultado = suma / vector[19];
+    return resultado;
+}
+    
+void insertar(int vector[]){ //inserta numeros opuestos, menores al promedio
+
+    int contador = 0, copia_vector[20];
+    for(contador <= vector[19]){ //Copio vector
+        copia_vector[contador] = vector[contador];
+        contador++;
+    }
+    vector[19] = copia_vector[19];
+    contador = 0;
+    int nueva_posicion = 0;
+    for(contador <= vector[19];contador++){
+        if(0==copia_vector[contador]%2 && copia_vector[contador]<promedio(copia_vector)){
+            vector[nueva_posicion] = - copia_vector[contador];
+            nueva_posicion++;
+            vector[nueva_posicion] = copia_vector[contador];
+            nueva_posicion++;
+        }
+        if(0!=copia_vector[contador]%2 || copia_vector[contador]>promedio(copia_vector)){
+            vector[nueva_posicion] = copia_vector[contador];
+            nueva_posicion++;
+        }
+    }
+}
+void ordenar(int vector[]){ //Ordena mayor a menor
+    int i=0,j=0,numero_actual,numero_mayor;
+    for(i < vector[19];i++ ){
+        for(j < vector[19];j++){
+            if(vector[i]<vector[j]){
+                numero_actual = vector[i];
+                numero_mayor = vector[j];
+                vector[i] = numero_mayor;
+                vector[i] = numero_actual;
+                
+            }
+        }
+    }
+}
+void mostrar(int vector[]){ //Imprime el vector
+    int contador=0;
+    printf("\nEl Vector es:");
+    if(vector[19] == 0 ){
+        printf("Vacio");
+    }
+    for(vector[19] <= contador){
+        printf("%d ", vector[contador]);
+    }
+        
+}
+    
+
+int main() {
+    
+    int vector[20];
+    cargar(vector);
+    printf("\nel vector ingresado es:");
+    insertar(vector); //Insertar el numero opuesto, antes de los positivos menores al promedio
+    ordenar(vector); //Ordena el vector de mayor a menor
+    printf("\nLuego de prosesar el vector el resultado es: ");
+    mostrar(vector); //Imprime el vector, si vector esta vacio imprime aviso
+    return 0;
+}

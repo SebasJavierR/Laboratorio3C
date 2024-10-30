@@ -1,0 +1,10 @@
+compras en el super - COMPRAS
+
+Destina -- restoderiva
+meseros === 3 (3 procesos)
+derivador, Muestra comidas consumidas
+comidas === 3 , Precio A, Precio B, Precio C
+menu
+
+mesero muestra precio comida
+200 ms chequear orden

@@ -1,0 +1,112 @@
+/*Standard Library*/
+#include "stdio.h"
+#include "stdlib.h"
+#include "unistd.h"
+#include "string.h"
+#include "pthread.h"
+/*Headers Library*/
+#include "framework/semaforos.h"
+#include "framework/aleatorio.h"
+#include "framework/hilos.h"
+#include "framework/cola.h"
+#include "program/defines.h"
+#include "program/globals.h"
+#include "program/funciones.h"
+/*File Header*/
+#include "thread_jugadores.h"
+
+void* jugadoresThread(void* parametro)
+{
+  mensaje msg;
+  jugador* datosThread;
+  int pasosAleatorio;
+  int intervalo;
+  int pasosJugador;
+  char nombreJugador[LARGO_NOMBRE];
+  int tiempoEspera;
+  int mitadCamino;
+  int finJuego;
+  int ErradoAleatorio;
+  
+  msg.longDest = MSG_NADIE;
+  msg.intRte = MSG_NADIE;
+  msg.intEvento = EVT_NINGUNO;
+  memset(msg.charMensaje,0x00,LARGO_MENSAJE);
+
+  datosThread = (jugador*)parametro;
+
+  memset(nombreJugador, 0x00, sizeof(LARGO_NOMBRE));
+
+  pasosAleatorio = 0;
+  pasosJugador = 0;
+  tiempoEspera = 0;
+  mitadCamino = 0;
+  finJuego = 0;
+
+  strcpy(nombreJugador, obtenerNombreJugador(datosThread->nroJugador));
+  esperarSemaforo(datosThread->idSemaforo);
+  escribirNombreJugador(datosThread->memoria, datosThread->nroJugador, nombreJugador);
+  levantarSemaforo(datosThread->idSemaforo);
+  intervalo = obtenerIntervaloJugador(datosThread->nroJugador);
+
+  while(msg.intEvento != EVT_FIN)
+  {
+    lockMutex(&mutex);
+    recibirMensaje(datosThread->idColaMensajes, MSG_JUGADOR + datosThread->nroJugador, &msg);
+    switch(msg.intEvento)
+    {
+      case EVT_NINGUNO:
+        break;
+      case EVT_CAMINAR:
+	printf("Jugador %s: Precione enter para petear\n", nombreJugador);
+	getchar();
+        pasosAleatorio = obtenerNumeroAleatorio(PASOS_MIN, PASOS_MAX);
+        pasosJugador += pasosAleatorio;
+	if(pasosAleatorio == 1)
+	{
+	 printf("Jugador %s: pateo y metio GOL en esta ronda\n", nombreJugador);
+	}
+	if(pasosAleatorio == 0)
+	{
+	 ErradoAleatorio = obtenerNumeroAleatorio(1, 3);
+	 if(ErradoAleatorio == 1)
+	 {
+	  printf("Jugador %s: pateo AFUERA en esta ronda\n", nombreJugador);
+	 }
+	 if(ErradoAleatorio == 2)
+	 {
+	  printf("Jugador %s: pateo al PALO en esta ronda\n", nombreJugador);
+	 }
+	 if(ErradoAleatorio == 3)
+	 {
+	  printf("Jugador %s: pateo y fue ATAJADO en esta ronda\n", nombreJugador);
+	 }
+	}
+
+
+        esperarSemaforo(datosThread->idSemaforo);
+        escribirPasosJugador(datosThread->memoria, datosThread->nroJugador, pasosJugador);
+        levantarSemaforo(datosThread->idSemaforo);
+        tiempoEspera = intervalo * pasosAleatorio;
+
+        printf("Jugador %s: lleva un total de %d goles\n\n", nombreJugador, pasosJugador);
+
+        enviarMensaje(datosThread->idColaMensajes, MSG_TABLERO, MSG_JUGADOR + datosThread->nroJugador, EVT_CAMINAR_FIN, "");
+        break;
+      case EVT_FIN:
+        finJuego = 1;
+        printf("Jugador %s: fin de juego\n", nombreJugador);
+        break;
+      default:
+        break;
+    }
+    unlockMutex(&mutex);
+    if (finJuego == 1)
+    {
+      break;
+    }
+    tiempoEspera = tiempoEspera != 0 ? tiempoEspera : intervalo;
+    usleep(tiempoEspera * 1000);
+  }
+  return 0;
+}

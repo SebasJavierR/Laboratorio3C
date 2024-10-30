@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include "utilidades.h"
+#include "semaforos.h"
+#include "gestionArchivos.h"
+
+
+
+
+
+
+
+
+/*Proceso PANEL*/ /*MOVER A OTRO ARCHIVO APARTE*/
+panel(int numeroPanel/*, char *argv[]*/){
+
+/*Comprobar que el numero sea del 1 a 3*/
+if ( 1 == numeroPanel || 2 == numeroPanel || 3 == numeroPanel ) 
+/*Cargar mensaje "default"*/
+for (/*1,2,3*/){ 
+replazarLineaArchivo(baseDatos, linea, contenidoNuevo);
+}
+/*Abrir Ciclo "infinito"*/
+while(){
+	/*Comprobar semaforo n(numeroPanel) = 1*/
+	if (semaforoValor(numeroSemaforo) == 1) {// 1
+		/*Actualizar Cartel*/
+		/*abrir archivo, buscar nuevo msg*/
+		abrirArchivo(baseDatos);
+		/*guardar nuevo mensaje como variable*/
+		replazarLineaArchivo(baseDatos, linea, contenidoNuevo);
+
+		/*Comprobar si es distinto a default*/
+		/*Cerrar Archivo*/
+		cerrarArchivo(baseDatos);
+	}
+	// si 0
+	/*Esperar 100ms*/
+}

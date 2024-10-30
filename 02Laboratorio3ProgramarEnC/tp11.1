@@ -1,0 +1,89 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct tiponodo
+{
+	int dato;
+
+    struct tiponodo *siguiente;
+}nodo;
+
+void mostrar (nodo aux,int *cont,int *acum, int Cant)
+
+{
+  printf("%d \n", aux.dato);
+  if(4 >= Cant - *cont)
+    *acum = *acum + aux.dato;
+
+  *cont = *cont+1;
+
+}
+
+nodo* crear_nodo(int dato )
+{
+   nodo* u;
+   u = (nodo *)malloc(sizeof(nodo));
+   u->dato = dato;
+
+   u->siguiente = NULL;
+
+   return u;
+}
+
+void apilar(nodo** p, nodo* u)
+{
+    printf("apilar_nodo\n");
+
+
+  	u->siguiente = *p;
+  	printf("%02d p=%p u=%p\n", u->dato, *p, u);
+	*p = u;
+}
+
+nodo desapilar(nodo** p)
+{
+	nodo* aux;
+    nodo datos;
+
+	datos=**p;
+
+	aux=*p;
+
+	*p=(*p)->siguiente;
+	free(aux);
+
+    return datos;
+}
+
+int main()
+{
+
+
+   int i,num, cont=0,acum=0,Cant;
+   nodo* p=NULL;
+
+  printf("¿Cuantos numeros va a ingresar? \n");
+  scanf("%d",&Cant);
+
+   for(i=0; i<Cant; i++)
+   {
+   	printf("Ingrese un numero \n");
+   	scanf("%d",&num);
+   	apilar(&p, crear_nodo(num));
+   }
+
+
+   printf("\nVamos a desapilar todo\n");
+	while(p!=NULL)
+   {
+    	mostrar(desapilar(&p),&cont,&acum,Cant);
+   }
+
+   if (Cant>=4)
+       printf("El promedio de los primeros 4 numeros es: %d\n",acum/4);
+  else
+   printf("se ingresaron menos de 4 numeros, debes ingresar al menos 4 para calcular el promedio de los primeros 4 numeros");
+
+   return 0;
+}

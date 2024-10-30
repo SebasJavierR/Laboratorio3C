@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct numeros{
+        int legajo;
+        int edad;
+        int cant_mat_cursadas;
+        int cant_mat_aprobadas;
+        struct numeros *sig;
+        }nodo;
+
+void crearlista(nodo *puntero){
+	printf("Ingrese legajo: ");
+	scanf("%d",&puntero->legajo);
+	while(puntero->legajo!=0){
+		printf("Ingrese Edad: ");
+		scanf("%d",&puntero->edad);
+		printf("Ingrese Cantidad de Materias Cursadas: ");
+		scanf("%d",&puntero->cant_mat_cursadas);
+		printf("Ingrese Cantidad de Materias Aprobadas: ");
+		scanf("%d",&puntero->cant_mat_aprobadas);
+		puntero->sig=(nodo *)malloc(sizeof(nodo));
+		puntero=puntero->sig;
+	    printf("Ingrese legajo: ");
+	    scanf("%d",&puntero->legajo);
+	}
+	puntero->sig=NULL;
+	
+	}
+
+	
+
+int main() {
+	nodo *puntero=NULL;
+	nodo *auxiliar=NULL;
+	puntero=(nodo *)malloc(sizeof(nodo));
+	auxiliar=(nodo *)malloc(sizeof(nodo));
+    crearlista(puntero);
+
+	printf("Creando Archivo...");
+    FILE *archivo;
+	if ((archivo=fopen("alumnos.dat","w"))==NULL)
+		printf("\n No se puede Abrir!!");
+	else
+	{
+	auxiliar = puntero;
+	while(auxiliar!=NULL)
+	{
+	    if(auxiliar->cant_mat_cursadas/auxiliar->cant_mat_aprobadas < 2)
+		    fprintf(archivo,"%d \n",auxiliar->legajo);
+	    auxiliar = auxiliar->sig;
+	}
+	}	
+	fclose(archivo);
+
+	return 0;
+}

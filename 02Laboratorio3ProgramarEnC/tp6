@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main() {
+    //declaro arreglo y puntero
+    float arreglo[15], *puntero;
+    
+    int i;
+    //Cargar arreglo
+    for(i=0; i<15; i++){
+	    printf("\nIngrese el valor %d: ", i);
+	    scanf("%f", &arreglo[i]);
+    }   
+    //mostrar arreglo
+    for (i=0; i<15; i++)
+        printf("En posicion %d el valor es %f \n", i, arreglo[i]);
+    
+    //Asignar al puntero la dirección del arreglo
+    puntero = arreglo;
+
+    // mostrar un arreglo utilizando el puntero
+    for (i=0; i<15; i++)
+        printf("En posicion %d el valor es %f y su puntero es %f \n", i, *(puntero+i),&puntero + i*32); 
+
+    
+    
+    return 0;
+}

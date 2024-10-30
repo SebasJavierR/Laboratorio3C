@@ -1,0 +1,88 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+typedef struct tiponodo
+{
+	int dato;
+
+    struct tiponodo *siguiente;
+}nodo;
+
+void mostrar (nodo aux, int *acum, int *cont)
+{
+  printf("%d \n", aux.dato);
+
+  if(*cont%2 != 0 )
+    *acum = *acum + aux.dato;
+
+  *cont = *cont +1;
+}
+
+nodo* crear_nodo(int dato)
+{
+   nodo* u;
+   u = (nodo *)malloc(sizeof(nodo));
+
+   u->dato = dato;
+
+   u->siguiente = NULL;
+
+   return u;
+}
+
+void acolar(nodo** p,nodo** u, nodo *q)
+{
+   printf("acolar_nodo\n");
+	if(*p==NULL)
+    *p = *u = q; /*porque hay uno solo*/
+   else
+   {
+    	(*u)->siguiente = q;
+    	(*u) = q;
+   }
+  	printf("%02d p=%p u=%p\n", q->dato, *p, *u);
+}
+
+nodo desacolar(nodo** inicio)
+{
+	nodo* aux;
+   nodo datos;
+
+	datos=**inicio;
+
+	aux=*inicio;
+
+	*inicio=(*inicio)->siguiente;
+	free(aux);
+
+    return datos;
+}
+
+int main()
+{
+
+   int i,num,Cant, acum = 0, cont = 0;
+   nodo* p=NULL;
+   nodo* u=NULL;
+
+  printf("¿Cuantos numeros va a ingresar? \n");
+  scanf("%d",&Cant);
+
+   for(i=0; i<Cant; i++)
+   {
+      printf("Ingrese un numero: ");
+      scanf("%d",&num);
+      acolar(&p, &u, crear_nodo(num));
+
+   }
+
+
+   printf("\nVamos a desacolar todo\n");
+	while(p!=NULL)
+   {
+    	mostrar(desacolar(&p),&acum, &cont);
+   }
+  printf("La sumatoria de las posiciones Pares es: %d\n",acum);
+  return 0;
+}

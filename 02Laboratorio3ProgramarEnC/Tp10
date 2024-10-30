@@ -1,0 +1,98 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct years{ //uso year envez de año como nombre para evitar problemas con la ñ
+    int year;
+    struct meses *mas;
+    struct years *sig;
+    } nodoa;
+    
+typedef struct meses{
+    int mes;
+    int promedio;
+    struct meses * sigm;
+}nodom;
+
+void crear_meses(nodom *puntero2){
+    printf("Ingrese el mes (numero): ");
+    scanf("%d", &puntero2->mes);
+    if(puntero2->mes==0)
+        puntero2->sigm=NULL;
+    else{
+        printf("Ingrese Promedio: ");
+        scanf("%d",&puntero2->promedio);
+        puntero2->sigm=(nodom *)malloc(sizeof(nodom));
+        crear_meses(puntero2->sigm);
+    }
+}
+
+void crear_years(nodoa *puntero1){
+    printf("Ingrese el año: ");
+    scanf("%d",&puntero1->year);
+    if(puntero1->year==0)
+        puntero1->sig=NULL;
+    else{
+        puntero1->mas=(nodom *)malloc(sizeof(nodom));
+        crear_meses(puntero1->mas);
+        puntero1->sig=(nodoa *)malloc(sizeof(nodoa));
+        crear_years(puntero1->sig);
+    }
+}
+
+void mostrar_meses(nodom *puntero2){
+	if(puntero2->sigm !=NULL){
+		printf("Mes: %d, ",puntero2->mes);
+		printf("Promedio: %d \n",puntero2->promedio);
+		mostrar_meses(puntero2->sigm);
+	}
+}
+
+void mostrar_years(nodoa *puntero1){
+	if(puntero1->sig!=NULL){
+		printf("Durante el año: %d \n",puntero1->year);
+		mostrar_meses(puntero1->mas);
+		mostrar_years(puntero1->sig);
+	}
+}
+
+
+void ordenar(nodoa* actual)
+{
+     nodoa *siguiente;
+     nodoa *aux=(nodoa*)malloc(sizeof(nodoa));
+
+     while(actual->sig != NULL)
+     {
+          siguiente = actual->sig;
+
+          while(siguiente->sig !=NULL)
+          {
+               if(actual->year > siguiente->year)
+               {
+                    aux->year=siguiente->year;
+                    aux->mas=siguiente->mas;
+
+                    siguiente->year=actual->year;
+                    siguiente->mas=actual->mas;
+
+                    actual->year=aux->year;
+                    actual->mas=aux->mas;
+               }
+               siguiente = siguiente->sig;
+          }
+          actual = actual->sig;
+
+     }
+}
+
+int main(){
+    nodoa *puntero=NULL;
+    puntero=(nodoa *)malloc(sizeof(nodoa));
+    crear_years(puntero);
+    ordenar(puntero);
+    printf("Mostrando ordenado de menor a mayor respecto al año... \n")
+    mostrar_years(puntero);
+    //No logre agregar al final
+    return 0;
+}

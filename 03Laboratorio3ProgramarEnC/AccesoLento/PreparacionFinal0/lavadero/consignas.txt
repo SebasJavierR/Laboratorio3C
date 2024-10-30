@@ -1,0 +1,12 @@
+RopaController - Aleatorio (Blanco-Color-Oscuro)(Nylon, Algodon), 
+
+Nylon 450ms - 5 Dolares
+Algodon 600ms - 7 Dolares
+
+Color - +1 dolar
+
+4 lavarropas
+
+Procesos 2, N lavarropas (4 - hilos)
+
+Si desocupado recibe orden
